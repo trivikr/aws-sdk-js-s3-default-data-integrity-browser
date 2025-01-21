@@ -8,6 +8,9 @@ Attempting a minimal repro for https://github.com/aws/aws-sdk-js-v3/issues/6818
 - Copy `.env.temp` to `.env` and fill in the values
   - [Create a Amazon Cognito Identity pool for testing][cognito-identity-pool], where the role should have write access to S3 bucket.
   - The S3 Bucket should have [CORS][cors] enabled.
+    - AllowedHeaders should be `*`.
+    - AllowedMethods should be the methods being tested.
+    - AllowedOrigins should be `http://localhost:5173`, or where the Vite test server is running.
 - Run `npm install`
 
 ## Run
