@@ -1,0 +1,29 @@
+{
+  "name": "aws-sdk-js-s3-default-data-integrity-browser",
+  "version": "1.0.0",
+  "description": "Attempting a minimal repro for https://github.com/aws/aws-sdk-js-v3/issues/6818",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "vite --open"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.729.0",
+    "@aws-sdk/client-cognito-identity": "3.729.0",
+    "@aws-sdk/credential-provider-cognito-identity": "3.729.0"
+  },
+  "devDependencies": {
+    "vite": "^6.0.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trivikr/aws-sdk-js-s3-default-data-integrity-browser.git"
+  },
+  "keywords": [],
+  "author": "Kamat, Trivikram",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/trivikr/aws-sdk-js-s3-default-data-integrity-browser/issues"
+  },
+  "homepage": "https://github.com/trivikr/aws-sdk-js-s3-default-data-integrity-browser#readme",
+  "type": "module"
+}
