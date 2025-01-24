@@ -20,7 +20,7 @@ document.getElementById("form").addEventListener("submit", async (e) => {
   const response = await client.putObject({
     Bucket: import.meta.env.VITE_AWS_S3_BUCKET_NAME,
     Key: file.name,
-    Body: file,
+    Body: file.stream(),
   });
 
   console.log("Response", response);
