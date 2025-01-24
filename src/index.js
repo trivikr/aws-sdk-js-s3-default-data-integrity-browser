@@ -2,24 +2,11 @@ import { S3 } from "@aws-sdk/client-s3";
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-provider-cognito-identity";
 import { CognitoIdentity } from "@aws-sdk/client-cognito-identity";
 
-const getHTMLElement = (title, content) => {
-  const element = document.createElement("div");
-  element.style.margin = "30px";
+document.getElementById("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const file = e.target[0].files[0];
+  console.log("Uploading file", file);
 
-  const titleDiv = document.createElement("div");
-  titleDiv.innerHTML = title;
-  const contentDiv = document.createElement("textarea");
-  contentDiv.rows = 20;
-  contentDiv.cols = 50;
-  contentDiv.innerHTML = content;
-
-  element.appendChild(titleDiv);
-  element.appendChild(contentDiv);
-
-  return element;
-};
-
-const component = async () => {
   const region = import.meta.env.VITE_AWS_REGION;
   const client = new S3({
     region,
@@ -28,14 +15,17 @@ const component = async () => {
       identityPoolId: import.meta.env.VITE_AWS_IDENTITY_POOL_ID,
     }),
   });
+
+  console.log("Calling putObject");
   const response = await client.putObject({
     Bucket: import.meta.env.VITE_AWS_S3_BUCKET_NAME,
-    Key: "foo",
-    Body: "bar",
+    Key: file.name,
+    Body: file,
   });
-  return getHTMLElement("Data returned:", JSON.stringify(response, null, 2));
-};
 
-(async () => {
-  document.body.appendChild(await component());
-})();
+  console.log("Response", response);
+  const responseElement = document.getElementById("response");
+  responseElement.innerHTML = JSON.stringify(response, null, 2);
+
+  return true;
+});
